@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.courseselectionsystem.mapper.CourseMapper">
+
+    <insert id="saveCourse">
+        <selectKey resultType="string" keyProperty="courseId" order="BEFORE">SELECT UUID()</selectKey>
+        INSERT INTO db_course(course_id,course_number,course_name,credits,course_teacher,create_time)
+        VALUES (#{courseId},#{courseNumber},#{courseName},#{credits},#{courseTeacher},now())
+    </insert>
+    <update id="updateCourse">
+        UPDATE db_course
+        SET
+        <if test="courseNumber!=null and courseNumber!=''">
+            course_number = #{courseNumber},
+        </if>
+        <if test="courseName!=null and courseName!=''">
+            course_name = #{courseName},
+        </if>
+        <if test="credits!=null and credits!=''">
+            credits = #{credits},
+        </if>
+        <if test="courseTeacher!=null and courseTeacher!=''">
+            course_teacher = #{courseTeacher},
+        </if>
+        course_id=#{courseId}
+        WHERE
+        course_id=#{courseId}
+    </update>
+    <delete id="deleteCourse">
+        DELETE FROM db_course
+        WHERE course_id=#{courseId}
+    </delete>
+    <select id="listCourse" resultType="com.courseselectionsystem.entity.CourseVo">
+        <include refid="findCourse"/>
+        WHERE
+        1=1
+        ORDER BY
+        db_course.course_number
+    </select>
+    <select id="listCourseByCondition" resultType="com.courseselectionsystem.entity.CourseVo">
+        <include refid="findCourse"/>
+        <where>
+            1=1
+            AND
+            <if test="condition!=null and condition!=''" >
+                CONCAT(
+                db_course.course_name,
+                db_course.course_teacher)
+                LIKE CONCAT('%',#{condition},'%')
+            </if>
+        </where>
+        ORDER BY
+        db_user.create_time DESC
+    </select>
+    <select id="findByCourseId" resultType="com.courseselectionsystem.entity.CourseVo">
+          <include refid="findCourse"/>
+        WHERE course_id=#{courseId}
+    </select>
+    <select id="findByCourseName" resultType="com.courseselectionsystem.entity.CourseVo">
+        <include refid="findCourse"/>
+        WHERE course_name = #{courseName}
+    </select>
+    <sql id="findCourse">
+        SELECT
+            db_course.course_id,
+            db_course.course_number,
+            db_course.course_name,
+            db_course.credits,
+            db_course.course_teacher,
+            UNIX_TIMESTAMP(db_course.create_time) create_time
+        FROM
+            db_course
+    </sql>
+</mapper>

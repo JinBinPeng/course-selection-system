@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.courseselectionsystem.mapper.UserMapper">
+    <resultMap id="UserResult" type="com.courseselectionsystem.entity.UserVo" autoMapping="true">
+        <id column="user_id" property="userId"/>
+        <result column="is_delete" property="delete"/>
+    </resultMap>
+    <insert id="saveUser">
+        <selectKey resultType="string" keyProperty="userId" order="BEFORE">SELECT UUID()</selectKey>
+        INSERT INTO db_user (user_id,`name`,password,
+        <if test="phoneNumber!=null and phoneNumber!=''">
+            phone_number,
+        </if>
+        department,student_number,
+        <if test="sex!=null and sex!=''">
+            sex,
+        </if>
+        create_time)
+        VALUES (#{userId},#{name},#{password},
+        <if test="phoneNumber!=null and phoneNumber!=''">
+            #{phoneNumber},
+        </if>
+        #{department},#{studentNumber},
+        <if test="sex!=null and sex!=''">
+            #{sex},
+        </if>
+        now())
+    </insert>
+    <update id="updateUser">
+        UPDATE db_user
+        SET
+        <if test="password!=null and password!=''">
+            password = #{password},
+        </if>
+        <if test="phoneNumber!=null and phoneNumber!=''">
+            phone_number = #{phoneNumber},
+        </if>
+        <if test="department!=null and department!=''">
+            department = #{department},
+        </if>
+        <if test="sex!=null and sex!=''">
+            sex = #{sex},
+        </if>
+        user_id=#{userId}
+        WHERE
+        user_id=#{userId}
+    </update>
+    <delete id="deleteUser">
+        UPDATE db_user
+        SET
+            is_delete = 1
+        WHERE
+            user_id=#{userId}
+    </delete>
+    <select id="findUserById" resultMap="UserResult">
+        <include refid="findUser"/>
+        WHERE user_id=#{userId}
+        AND
+        is_delete = 0
+    </select>
+    <select id="findUserByPhoneNumber" resultMap="UserResult">
+        <include refid="findUser"/>
+        <where>
+            <if test="phoneNumber!=null and phoneNumber!=''">
+                phone_number = #{phoneNumber}
+            </if>
+            AND
+            is_delete = 0
+        </where>
+    </select>
+    <select id="findUserByName" resultMap="UserResult">
+        <include refid="findUser"/>
+        <where>
+            <if test="name!=null and name!=''">
+                `name` = #{name}
+            </if>
+            AND
+            is_delete = 0
+        </where>
+    </select>
+    <select id="listUser" resultMap="UserResult">
+        <include refid="findUser"/>
+        WHERE
+        is_delete = 0
+        ORDER BY
+        db_user.create_time
+    </select>
+    <select id="listUserByCondition" resultMap="UserResult">
+        <include refid="findUser"/>
+        <where>
+            is_delete = 0
+            AND
+            <if test="condition!=null and condition!=''" >
+                CONCAT(
+                db_user.student_number,
+                db_user.name,
+                db_user.department)
+                LIKE CONCAT('%',#{condition},'%')
+            </if>
+        </where>
+        ORDER BY
+        db_user.create_time DESC
+    </select>
+    <select id="findUserByStudentNumber" resultMap="UserResult">
+        <include refid="findUser"/>
+        <where>
+            <if test="studentNumber!=null and studentNumber!=''">
+                student_number = #{studentNumber}
+            </if>
+            AND
+            is_delete = 0
+        </where>
+    </select>
+    <select id="findByUserVo" resultMap="UserResult">
+        <include refid="findUser"/>
+        <where>
+            is_delete = 0
+            <if test="phoneNumber!=null and phoneNumber!=''">
+                AND phone_number = #{phoneNumber}
+            </if>
+            <if test="name!=null and name!=''">
+                AND `name` = #{name}
+            </if>
+            <if test="studentNumber!=null and studentNumber!=''">
+                AND student_number = #{studentNumber}
+            </if>
+        </where>
+    </select>
+    <sql id="findUser">
+        SELECT
+            db_user.user_id,
+            db_user.name,
+            db_user.`password`,
+            db_user.phone_number,
+            db_user.department,
+            db_user.sex,
+            db_user.student_number,
+            UNIX_TIMESTAMP(db_user.create_time) create_time,
+            UNIX_TIMESTAMP(db_user.update_time) update_time,
+            db_user.is_delete,
+            db_user.type
+        FROM
+            db_user
+    </sql>
+</mapper>

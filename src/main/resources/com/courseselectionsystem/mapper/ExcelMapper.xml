@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.courseselectionsystem.mapper.ExcelMapper">
+    <insert id="addExcel">
+        <selectKey  keyProperty="id" resultType="string" order="BEFORE">SELECT UUID()</selectKey>
+        INSERT INTO db_excel (id,excel_url)
+        VALUE (#{id},#{excelUrl})
+    </insert>
+    <select id="findExcelById" resultType="com.courseselectionsystem.entity.ExcelVo">
+        <include refid="findExcel"/>
+        WHERE
+        id=#{id}
+    </select>
+    <sql id="findExcel">
+        SELECT
+        db_excel.id,
+        UNIX_TIMESTAMP(db_excel.create_time) create_time,
+        db_excel.excel_url
+        FROM
+        db_excel
+    </sql>
+</mapper>

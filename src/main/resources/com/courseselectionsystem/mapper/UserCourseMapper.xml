@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.courseselectionsystem.mapper.UserCourseMapper">
+    <resultMap id="UserCourseResult" type="com.courseselectionsystem.entity.UserCourseVo" autoMapping="true">
+        <association property="userVo" column="user_id" select="com.courseselectionsystem.mapper.UserMapper.findUserById"/>
+        <association property="courseVo" column="course_id" select="com.courseselectionsystem.mapper.CourseMapper.findByCourseId"/>
+    </resultMap>
+    <insert id="saveUserCourse">
+        <selectKey resultType="string" keyProperty="id" order="BEFORE">SELECT UUID()</selectKey>
+        INSERT INTO user_course(id,user_id,course_id)
+        VALUES (#{id},#{userId},#{courseId})
+    </insert>
+    <delete id="deleteUserCourse">
+        DELETE FROM user_course
+        WHERE id=#{id}
+    </delete>
+    <delete id="deleteUserCourseByUserId">
+        DELETE FROM user_course
+        WHERE user_id=#{userId}
+    </delete>
+    <delete id="deleteUserCourseByCourseId">
+        DELETE FROM user_course
+        WHERE course_id=#{courseId}
+    </delete>
+    <select id="findById" resultMap="UserCourseResult">
+        <include refid="findUserCourse"/>
+        WHERE id=#{id}
+    </select>
+    <select id="listCourse" resultMap="UserCourseResult">
+        <include refid="findUserCourse"/>
+        <where>
+            1=1
+            <if test="userId != null and userId!= ''">
+                AND user_id=#{userId}
+            </if>
+            <if test="courseId != null and courseId!= ''">
+                AND course_id=#{courseId}
+            </if>
+            <if test="id != null and id!= ''">
+                AND id=#{id}
+            </if>
+        </where>
+        ORDER BY
+        user_course.create_time
+    </select>
+    <select id="findByUserIdAndCourseId" resultMap="UserCourseResult">
+        <include refid="findUserCourse"/>
+        WHERE user_id=#{userId} AND course_id=#{courseId}
+    </select>
+    <sql id="findUserCourse">
+        SELECT
+            user_course.id,
+            user_course.user_id,
+            user_course.course_id,
+            UNIX_TIMESTAMP(user_course.create_time) create_time
+        FROM
+            user_course
+    </sql>
+</mapper>

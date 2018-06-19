@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://139.199.220.49:3306/course?useSSL=true
+    username: root
+    password: 1997
+  http:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 100MB
+mybatis:
+  config-location: classpath:mybatis.xml
+  type-aliases-package: com.courseselectionsystem.entity
+  mapper-locations: classpath*:com/courseselectionsystem/mapper/*.xml
+#七牛云
+qiniu:
+  accessKey: Bx4bezJT0vWnE_gjvLeggEv6xfXG5NgjuvAcit8w
+  secretKey: 2mZZMYAZnkUo3dUQCojsUpSPi9zifEQvcFYDoODx
+  bucketname: yi-curricula-variable
+  url: http://p8fubgwbc.bkt.clouddn.com
+debug: true
+server:
+  port: 8888

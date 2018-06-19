@@ -1,0 +1,9 @@
+{
+  "name" : "course-selection-system",
+  "version": "1.0.0",
+  "title": "易选课系统接口",
+  "description": "网络数据库编程大作业",
+  "template":{
+    "forceLanguage":"zh_cn"
+  }
+}
