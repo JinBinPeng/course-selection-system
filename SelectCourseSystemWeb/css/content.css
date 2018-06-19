@@ -1,0 +1,150 @@
+aside{
+    width:20%;
+    background: #666;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+}
+img{
+    margin:10px 0 0 20px;
+}
+li{
+    font-size:16px;
+    display: block;
+    height:30px;
+    line-height:30px;
+    margin:10px;
+    padding-left:40px;
+    background: #777;
+}
+li a{
+    color: #BBB;
+}
+.content{
+    width:80%;
+    position: absolute;
+    left: 20%;
+    top:0;
+    bottom:0;
+}
+h1{
+    text-align: center;
+    height:64px;
+    line-height:64px;
+    background: #E8E8E8;
+}
+.info{
+    position: absolute;
+    top:20px;
+    right:20px;
+}
+a:link,
+a:visited{
+    color:#A6A6A6;
+}
+a:hover,
+a:active{
+    color: #169BD5;
+}
+
+
+
+/* Personal information */
+h2{
+    margin:30px 0 10px 50px;
+}
+table{
+    border:1px solid #CCCCCC;
+}
+.pi{
+    margin:30px 0 50px 80px;
+}
+table td{
+    width:150px;
+    height:40px;
+    border:1px solid #CCCCCC;
+}
+button{
+    width:100px;
+    height:30px;
+    background: #169BD5;
+    border-radius: 5px;
+    border:none;
+    color:#fff;
+    cursor: pointer;
+}
+.pibtn:nth-of-type(1){
+    margin:0 230px;
+}
+tr{
+    transition: background .3s;
+}
+tr:hover{
+    background: #E8E8E8;
+}
+
+/* Select course && Course information*/
+.scform{
+    margin:20px 0;
+}
+.scbtn{
+    margin:0 200px;
+}
+.scform #search{
+    /*height:15px;
+    padding:5px;*/
+    background: url("../searchicon.png") no-repeat 10px 12px;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+.selectedC{
+    margin-top:20px;
+}
+.selectedCT{
+    margin-top:10px;
+    font-weight: bold;
+    font-size:14px;
+    display: none;
+}
+/* Enter student information*/
+.esi input:nth-of-type(2){
+    margin:0 100px 0 200px;
+}
+.esi input[type="button"]{
+    width:100px;
+    height:30px;
+    background: #169BD5;
+    border-radius: 5px;
+    border:none;
+    color:#fff;
+    cursor: pointer;
+}
+.adminaside{
+    background: #604B4B;
+}
+.adminul li{
+    background: #A36363;
+}
+.adminh1{
+    background: #FCE7E7;
+}
+
+/* Enter course information */
+.eci{
+    margin:10px 0;
+}
+.eci input:nth-of-type(2){
+    margin:0 60px 0 150px;
+}
+.eci input[type="button"]{
+    width:100px;
+    height:30px;
+    background: #169BD5;
+    border-radius: 5px;
+    border:none;
+    color:#fff;
+    cursor: pointer;
+}

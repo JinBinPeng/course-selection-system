@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易选课——学生信息录入</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/content.css">
+</head>
+<body>
+<div class="wrap">
+    <aside class="adminaside">
+        <img src="logo.png" alt="易选课">
+        <ul class="adminul">
+            <li><a href="Enter%20student%20information.html">输入学生信息</a></li>
+            <li><a href="Enter%20course%20information.html">输入课程信息</a></li>
+        </ul>
+    </aside>
+    <div class="content">
+        <h1 class="adminh1">学生选课系统</h1>
+        <div class="info">
+            <span>欢迎你，黎敬锋</span><a href="#">[退出]</a>
+        </div>
+        <h2>输入学生信息</h2>
+        <!-- form表单上次文件到七牛云 -->
+        <form method="post" action="http://139.199.220.49:8888/api/qiniu/info" class="esi" id="uploadform" enctype="multipart/form-data"><!-- 改动一：加上method、enctype属性，action用接口地址-->
+            <input name="token" type="hidden" value="Bx4bezJT0vWnE_gjvLeggEv6xfXG5NgjuvAcit8w:VXkFhIPuTghoR7MwQxGTgL-IQuQ=:eyJzY29wZSI6InlpLWN1cnJpY3VsYS12YXJpYWJsZSIsImRlYWRsaW5lIjoxNTI2MTQ3MTM3fQ==">  <!-- 改动二：加上token-->
+            <input type="file" id="upload" name="file" required> <!-- 改动三：加上name名-->
+            <input type="button" value="上传" id="uploadfile" onclick="sentAjax()"><!-- 改动四：加上submit按钮--><!-- 改动五：改为button按钮（通过下面的ajax提交，把formdata传到data属性），不会再点击事件后又提交一次表单（否则会跳转页面到json数据）-->
+        </form>
+        <table border="1px" cellspacing="0" cellpadding="0" class="pi" id="stutab">
+            <tr align="center">
+                <td>学院</td>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>联系方式</td>
+            </tr>
+        </table>
+        <div id="Pagination" style="margin-left: 400px" ></div>
+    </div>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/exit.js"></script>
+<script src="js/enterStudentInformation.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易选课——选择课程</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/content.css">
+</head>
+<body>
+<div class="wrap">
+    <aside>
+        <img src="logo.png" alt="易选课">
+        <ul>
+            <li><a href="Personal%20information.html">个人信息</a></li>
+            <li><a href="Select%20course.html">选择课程</a></li>
+            <li><a href="Course%20information.html">课程信息</a></li>
+        </ul>
+    </aside>
+    <div class="content">
+        <h1>学生选课系统</h1>
+        <div class="info">
+            <span>欢迎你，黎敬锋</span><a href="#">[退出]</a>
+        </div>
+        <form action="" class="scform">
+            <button class="scbtn">刷新</button>
+            <label for="search"></label>
+            <input id="search" placeholder="搜索课程..." onkeyup="searchCourse()">
+        </form>
+        <table class="sc" border="1" cellspacing="0" cellpadding="0" id="stusctab">
+            <tr align="center">
+                <td>课程编号</td>
+                <td>课程名称</td>
+                <td>学分</td>
+                <td>授课老师</td>
+                <td>操作</td>
+            </tr>
+        </table>
+        <p class="selectedCT">已选课程：（退选请到“课程信息”页操作）</p>
+        <table class="selectedC" border="1" cellspacing="0" cellpadding="0">
+
+        </table>
+    </div>
+</div>
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/exit.js"></script>
+<script src="js/selectCourse.js"></script>
+</html>

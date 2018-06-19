@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易选课——登录</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<div class="loginBox">
+    <h1>学生选课系统</h1>
+    <form action="" id="loginform">
+        <label for="student"></label>
+        <input type="button" value="学生用户" id="student">
+        <label for="username"></label>
+        <input placeholder="学号/工号" id="username" required>
+        <label for="admin"></label>
+        <input type="button" value="管理员" id="admin" onclick="changeColor(this)">
+        <label for="password"></label>
+        <input type="password" placeholder="密码" id="password" required>
+        <input type="checkbox" value="60天内免登录" id="freelogin">
+        <label for="freelogin">60天内免登录</label>
+        <a href="Change%20password.html">忘记密码？</a>
+        <label for="loginbtn"></label>
+        <input type="submit" value="登   录" id="loginbtn">
+    </form>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

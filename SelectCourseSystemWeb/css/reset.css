@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* CSS Document */
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,table,td,img,div,dl,dt,dd,input{
+    margin:0;
+    padding:0;
+}             /*css 通配符 “*”会将网站内所有元素的默认值重设，这在大型网站会加重客户端的负担，浏览器运行速度变慢。
+                  但如果开发的是小型站点或企业网站，页面元素不是很多，使用CSS 通配符造成的性能影响可以忽略。*/
+body{
+    font-size:12px;
+}
+img{
+    border:none;
+}
+li{
+    list-style:none;
+}
+input,select{
+    outline:none;  /*outline （轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用。*/
+}
+a{
+    text-decoration: none;
+    color:#000;
+}
+
+/*清浮动*/
+.clearfix:after{
+    content:"";
+    display: block;
+    clear:both;
+    height:0;
+    visibility: hidden;
+}
+.clearfix{
+    zoom: 1;/*兼容IE*/
+}
